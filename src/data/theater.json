@@ -1,0 +1,37 @@
+{
+  "currentPosition": {
+    "title": "House Bassist & Music Coordinator",
+    "venue": "The Marriott Theatre",
+    "location": "Lincolnshire, IL",
+    "description": "One of the largest subscription-based musical theater companies in the United States. As house bassist, Trevor performs in every production. As music coordinator, he oversees all musical logistics for the company.",
+    "since": "Present"
+  },
+  "featured": [
+    {
+      "show": "Hamilton",
+      "venue": "CIBC Theatre",
+      "city": "Chicago, IL",
+      "role": "Substitute Bassist",
+      "year": "Ongoing",
+      "description": "Serving as a substitute bassist in the long-running Chicago production of Lin-Manuel Miranda's landmark musical."
+    }
+  ],
+  "credits": [
+    {
+      "show": "Hamilton",
+      "venue": "CIBC Theatre",
+      "city": "Chicago, IL",
+      "role": "Substitute Bassist",
+      "year": "Ongoing"
+    },
+    {
+      "show": "Various Productions",
+      "venue": "The Marriott Theatre",
+      "city": "Lincolnshire, IL",
+      "role": "House Bassist & Music Coordinator",
+      "year": "Ongoing",
+      "note": "All mainstage productions"
+    }
+  ],
+  "note": "Add new theater credits to the 'credits' array above. Each credit should include: show (title), venue, city, role, year, and an optional note."
+}

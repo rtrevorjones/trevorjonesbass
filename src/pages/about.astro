@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+import bio from '../data/bio.json';
+---
+
+<Layout
+  title="About | Trevor Jones"
+  description={`${bio.name} — ${bio.title} based in ${bio.location}. ${bio.tagline}`}
+>
+  <!-- ─── PAGE HERO ─────────────────────────────────────────── -->
+  <section class="pt-40 pb-20 relative overflow-hidden border-b border-white/8">
+    <!-- Vertical accent -->
+    <div class="absolute left-0 top-0 bottom-0 w-1 bg-bauhaus-red" aria-hidden="true"></div>
+
+    <div class="max-w-7xl mx-auto px-10 md:px-16">
+      <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red mb-8">
+        01 — Profile
+      </p>
+      <h1 class="font-serif italic text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-parchment">
+        About
+      </h1>
+    </div>
+
+    <!-- Decorative block -->
+    <div class="absolute right-10 top-1/2 -translate-y-1/2 w-32 h-1 bg-bauhaus-blue/20" aria-hidden="true"></div>
+  </section>
+
+  <!-- ─── BIO ───────────────────────────────────────────────── -->
+  <section class="max-w-7xl mx-auto px-6 md:px-10 py-28">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+      <!-- Sidebar -->
+      <aside class="md:col-span-3 md:sticky md:top-28" data-reveal="left">
+        <!-- Geometric mark -->
+        <div class="w-20 h-0.5 bg-bauhaus-red mb-8" aria-hidden="true"></div>
+        <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-6">
+          Quick Facts
+        </p>
+        <ul class="space-y-4">
+          {[
+            { label: 'Based in', value: bio.location },
+            { label: 'Primary role', value: 'Bassist' },
+            { label: 'Endorsements', value: bio.endorsements.map(e => e.brand).join(', ') },
+          ].map((fact) => (
+            <li>
+              <p class="font-mono text-[9px] uppercase tracking-widest text-parchment/30 mb-1">{fact.label}</p>
+              <p class="font-serif text-base text-parchment/80">{fact.value}</p>
+            </li>
+          ))}
+        </ul>
+      </aside>
+
+      <!-- Bio text -->
+      <div class="md:col-span-9 space-y-8">
+        {bio.bio.map((paragraph, i) => (
+          <p
+            class="font-serif text-xl md:text-2xl text-parchment/85 leading-relaxed"
+            data-reveal
+            data-delay={String(i * 150)}
+          >
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HIGHLIGHTS ────────────────────────────────────────── -->
+  <section class="border-t border-white/8 py-28 bg-white/[0.015]">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+        <!-- Label -->
+        <div class="md:col-span-3" data-reveal="left">
+          <div class="w-12 h-px bg-bauhaus-red mb-4"></div>
+          <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red">Highlights</p>
+        </div>
+
+        <!-- List -->
+        <div class="md:col-span-9">
+          <ul class="divide-y divide-white/8" role="list">
+            {bio.highlights.map((item, i) => (
+              <li
+                class="py-5 flex items-start gap-6"
+                data-reveal
+                data-delay={String((i % 5) * 80)}
+              >
+                <span class="font-mono text-[10px] text-bauhaus-red flex-shrink-0 mt-1" aria-hidden="true">
+                  ◆
+                </span>
+                <span class="font-serif text-lg text-parchment/80 leading-snug">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ENDORSEMENTS ──────────────────────────────────────── -->
+  <section class="border-t border-white/8 py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="mb-14" data-reveal>
+        <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-3">Partners</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-parchment">Endorsements</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-white/8">
+        {bio.endorsements.map((e, i) => (
+          <div
+            class={`p-10 ${i % 2 === 0 ? 'border-b sm:border-b-0 sm:border-r border-white/8' : ''}`}
+            data-reveal
+            data-delay={String(i * 150)}
+          >
+            <div class="w-8 h-0.5 bg-bauhaus-red mb-6" aria-hidden="true"></div>
+            <p class="font-serif text-3xl text-parchment mb-2">{e.brand}</p>
+            <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/40 mb-1">{e.role}</p>
+            <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/25">{e.category}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ORGANIZATIONS ─────────────────────────────────────── -->
+  <section class="border-t border-white/8 py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="mb-14" data-reveal>
+        <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-3">Affiliations</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-parchment">Organizations</h2>
+      </div>
+
+      <div class="flex flex-wrap gap-0 border border-white/8">
+        {bio.organizations.map((org, i) => (
+          <div class="p-10 border-b sm:border-b-0 sm:border-r last:border-r-0 border-white/8 flex-1 min-w-[240px]" data-reveal data-delay={String(i * 150)}>
+            <p class="font-serif text-2xl text-parchment mb-2">{org.name}</p>
+            <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red mb-3">{org.role}</p>
+            {org.description && (
+              <p class="font-mono text-xs text-parchment/40 leading-relaxed">{org.description}</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ───────────────────────────────────────────────── -->
+  <section class="py-24 border-t border-white/8 text-center">
+    <div class="max-w-7xl mx-auto px-6 md:px-10" data-reveal>
+      <p class="font-serif italic text-3xl md:text-4xl text-parchment mb-8">Ready to work together?</p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-widest text-void bg-bauhaus-red px-8 py-4 hover:bg-bauhaus-red/85 transition-colors"
+      >
+        Get in Touch <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+</Layout>

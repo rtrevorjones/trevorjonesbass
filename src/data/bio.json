@@ -1,0 +1,48 @@
+{
+  "name": "Trevor Jones",
+  "title": "Bassist",
+  "location": "Chicago, IL",
+  "tagline": "Shaping sound at the intersection of theater, jazz, and the orchestral tradition.",
+  "bio": [
+    "Trevor Jones is a Chicago-based bassist whose work spans Broadway pit orchestras, national touring rock, and the great American symphony tradition. As House Bassist and Music Coordinator at The Marriott Theatre in Lincolnshire, Illinois — one of the largest subscription-based musical theaters in the nation — he anchors the rhythm section for every production while overseeing the musical needs of the company.",
+    "A regular substitute in the Chicago production of Hamilton, Trevor brings the same exacting musicality to the commercial theater world that he applies to orchestral settings. He has performed with the Elgin Symphony Orchestra, the Grant Park Orchestra, and the Civic Orchestra of Chicago, and his career has taken him to Carnegie Hall (2004) and to stages at the Montreux and Vienne Jazz Festivals in Europe.",
+    "Beyond the pit and concert hall, Trevor is the co-writer and bassist for Molehill, an alternative rock band with national touring credits, a Chicago Tribune feature, and an ASCAP+ Award. He is a D'Addario Artist and Gallien-Krueger endorsed bassist, and co-founder of Double Bass HQ, an educational platform for bass players."
+  ],
+  "highlights": [
+    "House Bassist & Music Coordinator, The Marriott Theatre (Lincolnshire, IL)",
+    "Substitute Bassist, Hamilton — Chicago Production",
+    "Carnegie Hall, New York, NY — 2004",
+    "Montreux Jazz Festival, Montreux, Switzerland",
+    "Jazz à Vienne, Vienne, France",
+    "Elgin Symphony Orchestra",
+    "Grant Park Orchestra",
+    "Civic Orchestra of Chicago",
+    "Co-writer & Bassist, Molehill (ASCAP+ Award, Chicago Tribune)",
+    "D'Addario Artist",
+    "Gallien-Krueger Endorsed Artist",
+    "Co-founder, Double Bass HQ"
+  ],
+  "endorsements": [
+    {
+      "brand": "D'Addario",
+      "role": "Artist",
+      "category": "Strings"
+    },
+    {
+      "brand": "Gallien-Krueger",
+      "role": "Endorsed Artist",
+      "category": "Amplification"
+    }
+  ],
+  "organizations": [
+    {
+      "name": "Double Bass HQ",
+      "role": "Co-founder",
+      "description": "Educational platform and community for bass players"
+    },
+    {
+      "name": "ASCAP",
+      "role": "Member"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+import"./hoisted.9IMpJ6H0.js";function c(){if(new URLSearchParams(window.location.search).get("success")==="true"){const e=document.getElementById("contact-form"),s=document.getElementById("form-success");e&&e.classList.add("hidden"),s&&s.classList.remove("hidden")}}c();document.addEventListener("astro:page-load",c);

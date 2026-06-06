@@ -1,0 +1,74 @@
+---
+const year = new Date().getFullYear();
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/theater', label: 'Theater' },
+  { href: '/music', label: 'Music' },
+  { href: '/consulting', label: 'Consulting' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<footer class="border-t border-white/8 mt-32">
+  <!-- Red accent bar -->
+  <div class="h-0.5 bg-bauhaus-red w-24 ml-6 md:ml-10 -mt-px"></div>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+      <!-- Identity -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-bauhaus-red flex items-center justify-center flex-shrink-0">
+            <span class="font-mono text-xs font-medium text-parchment tracking-tight">TJ</span>
+          </div>
+        </div>
+        <p class="font-serif text-xl text-parchment mb-1">Trevor Jones</p>
+        <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/40">Bassist · Chicago, IL</p>
+        <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/40 mt-1">D'Addario Artist · GK Endorsed</p>
+      </div>
+
+      <!-- Nav links -->
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-5">Navigate</p>
+        <ul class="flex flex-col gap-3" role="list">
+          {links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="font-mono text-[11px] uppercase tracking-widest text-parchment/50 hover:text-parchment transition-colors"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact / CTA -->
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-5">Get in Touch</p>
+        <p class="font-serif text-base text-parchment/70 mb-6 leading-relaxed">
+          Booking inquiries, press requests, and consultation availability.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-widest text-void bg-bauhaus-red px-5 py-3 hover:bg-bauhaus-red/85 transition-colors"
+        >
+          Contact Trevor
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-16 pt-8 border-t border-white/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <p class="font-mono text-[10px] text-parchment/25 uppercase tracking-widest">
+        &copy; {year} Trevor Jones. All rights reserved.
+      </p>
+      <p class="font-mono text-[10px] text-parchment/25 uppercase tracking-widest">
+        trevorjonesbass.com
+      </p>
+    </div>
+  </div>
+</footer>

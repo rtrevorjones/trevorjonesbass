@@ -1,0 +1,64 @@
+{
+  "bands": [
+    {
+      "name": "Molehill",
+      "genre": "Alternative Rock",
+      "role": "Co-writer, Bassist",
+      "status": "Active",
+      "description": "An alternative rock band based in Chicago. Trevor co-writes the material and anchors the low end, bringing the same harmonic sophistication he developed in orchestral and theater settings into a guitar-driven rock context.",
+      "achievements": [
+        "National touring",
+        "Chicago Tribune coverage",
+        "ASCAP+ Award"
+      ],
+      "links": {}
+    }
+  ],
+  "orchestral": [
+    {
+      "ensemble": "Elgin Symphony Orchestra",
+      "location": "Elgin, IL",
+      "type": "Professional Symphony"
+    },
+    {
+      "ensemble": "Grant Park Orchestra",
+      "location": "Chicago, IL",
+      "type": "Professional Symphony",
+      "note": "Resident orchestra of the Grant Park Music Festival, one of the country's last free outdoor classical music series"
+    },
+    {
+      "ensemble": "Civic Orchestra of Chicago",
+      "location": "Chicago, IL",
+      "type": "Training Orchestra",
+      "note": "The training orchestra of the Chicago Symphony Orchestra"
+    }
+  ],
+  "festivals": [
+    {
+      "name": "Montreux Jazz Festival",
+      "location": "Montreux, Switzerland",
+      "year": ""
+    },
+    {
+      "name": "Jazz à Vienne",
+      "location": "Vienne, France",
+      "year": ""
+    }
+  ],
+  "notable": [
+    {
+      "event": "Carnegie Hall",
+      "location": "New York, NY",
+      "year": "2004",
+      "description": "Performed at Carnegie Hall."
+    }
+  ],
+  "projects": [
+    {
+      "name": "Double Bass HQ",
+      "role": "Co-founder",
+      "description": "An educational platform and community built to help bass players at every level grow their craft, find resources, and connect with other musicians.",
+      "url": ""
+    }
+  ]
+}

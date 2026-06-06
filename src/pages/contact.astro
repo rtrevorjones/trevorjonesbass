@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const topicParam = Astro.url.searchParams.get('topic') ?? '';
+---
+
+<Layout
+  title="Contact | Trevor Jones"
+  description="Get in touch with Trevor Jones — booking inquiries, consultation requests, and press."
+>
+  <!-- ─── PAGE HERO ─────────────────────────────────────────── -->
+  <section class="pt-40 pb-20 relative overflow-hidden border-b border-white/8">
+    <div class="absolute left-0 top-0 bottom-0 w-1 bg-bauhaus-red" aria-hidden="true"></div>
+
+    <div class="max-w-7xl mx-auto px-10 md:px-16">
+      <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red mb-8">
+        05 — Connect
+      </p>
+      <h1 class="font-serif italic text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-parchment">
+        Contact
+      </h1>
+    </div>
+  </section>
+
+  <!-- ─── INTRO + FORM ──────────────────────────────────────── -->
+  <section class="max-w-7xl mx-auto px-6 md:px-10 py-28">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+
+      <!-- Left: intro -->
+      <div class="md:col-span-4" data-reveal="left">
+        <div class="w-12 h-px bg-bauhaus-red mb-8"></div>
+
+        <p class="font-serif text-2xl md:text-3xl text-parchment leading-relaxed mb-10">
+          Booking, press, consultations, and general inquiries.
+        </p>
+
+        <div class="space-y-8">
+          <!-- Topics guide -->
+          <div>
+            <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-4">Topics</p>
+            <ul class="space-y-3" role="list">
+              {[
+                { label: 'Booking', desc: 'Pit orchestra, session, live gig inquiries' },
+                { label: 'Consultation', desc: 'Career path conversations' },
+                { label: 'Press', desc: 'Media requests and interviews' },
+                { label: 'Other', desc: 'Everything else' },
+              ].map((t) => (
+                <li class="flex gap-3">
+                  <span class="font-mono text-[10px] text-bauhaus-red flex-shrink-0 mt-0.5" aria-hidden="true">◆</span>
+                  <div>
+                    <span class="font-mono text-[10px] uppercase tracking-widest text-parchment/70">{t.label}</span>
+                    <span class="block font-mono text-[9px] text-parchment/30 mt-0.5">{t.desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Note -->
+          <div class="border-t border-white/8 pt-8">
+            <p class="font-mono text-[10px] text-parchment/30 leading-relaxed uppercase tracking-wider">
+              Trevor reads every message and responds personally. Response time is typically 2–5 business days.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="md:col-span-8" data-reveal data-delay="150">
+        <ContactForm preselectedTopic={topicParam} />
+      </div>
+    </div>
+  </section>
+</Layout>
