@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import bio from '../data/bio.json';
+import { parseLinks } from '../utils/parseLinks';
 ---
 
 <Layout
@@ -8,69 +9,60 @@ import bio from '../data/bio.json';
   description={bio.tagline}
 >
   <!-- ─── HERO ─────────────────────────────────────────────── -->
-  <section class="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16">
-    <!-- Vertical red accent bar -->
-    <div class="absolute left-0 top-0 bottom-0 w-1 bg-bauhaus-red"></div>
+  <section class="pt-16 border-b border-white/8">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-0 min-h-[520px]">
 
-    <!-- Background geometric circle -->
-    <div
-      class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-[32rem] h-[32rem] border border-white/4 rounded-full pointer-events-none"
-      aria-hidden="true"
-    ></div>
-    <div
-      class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-64 h-64 border border-bauhaus-blue/10 rounded-full pointer-events-none"
-      aria-hidden="true"
-    ></div>
-
-    <!-- Bauhaus red block (decorative top right) -->
-    <div
-      class="absolute top-24 right-10 w-4 h-24 bg-bauhaus-red/20 pointer-events-none"
-      aria-hidden="true"
-    ></div>
-
-    <div class="max-w-7xl mx-auto px-10 md:px-16 w-full py-20">
-      <!-- Location label -->
-      <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red mb-10">
-        Chicago, IL
-      </p>
-
-      <!-- Name -->
-      <h1
-        class="font-serif italic text-[clamp(3.5rem,10vw,9rem)] leading-[0.9] text-parchment mb-10 md:mb-14"
-      >
-        Trevor<br />Jones
-      </h1>
-
-      <!-- Divider with diamond -->
-      <div class="flex items-center gap-4 mb-8 max-w-sm" aria-hidden="true">
-        <div class="h-px bg-bauhaus-red flex-1"></div>
-        <div class="w-2 h-2 bg-bauhaus-red rotate-45 flex-shrink-0"></div>
+      <!-- Left: name and role -->
+      <div class="flex flex-col justify-center py-16 md:py-0 md:pr-12">
+        <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red mb-8">
+          Chicago, IL
+        </p>
+        <h1 class="font-serif italic text-[clamp(2.8rem,5.5vw,6rem)] leading-[0.9] text-parchment mb-8 whitespace-nowrap">
+          Trevor Jones
+        </h1>
+        <div class="flex items-center gap-4 mb-8" aria-hidden="true">
+          <div class="h-px bg-bauhaus-red w-12"></div>
+          <div class="w-2 h-2 bg-bauhaus-red rotate-45 flex-shrink-0"></div>
+        </div>
+        <p class="font-mono text-xs md:text-sm uppercase tracking-widest text-parchment/70">
+          Bassist
+        </p>
       </div>
 
-      <!-- Role -->
-      <p class="font-mono text-xs md:text-sm uppercase tracking-widest text-parchment/70 mb-14">
-        Bassist
-      </p>
-
-      <!-- Credential strip -->
-      <div class="flex flex-wrap gap-x-8 gap-y-3">
-        {[
-          'Marriott Theatre',
-          'Hamilton Chicago',
-          'D\'Addario Artist',
-          'Double Bass HQ',
-        ].map((item) => (
-          <span class="font-mono text-[10px] uppercase tracking-widest text-parchment/35">
-            {item}
-          </span>
-        ))}
+      <!-- Right: collage -->
+      <div class="flex items-center justify-center bg-void py-8 md:py-12">
+        <div class="flex gap-3 w-full max-w-md px-4 md:px-0">
+          <!-- Headshot: large, left side -->
+          <div class="flex-[2]">
+            <img
+              src="/trevor_headshot.jpg"
+              alt="Trevor Jones"
+              class="w-full h-full object-contain rounded-lg shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_4px_20px_rgba(0,0,0,0.6)]"
+              style="filter: brightness(0.92) contrast(1.05) saturate(0.9);"
+            />
+          </div>
+          <!-- Key bass + bass guitar: equal size, stacked right side -->
+          <div class="flex-[1] flex flex-col gap-3">
+            <div class="flex-1">
+              <img
+                src="/trevor_keybass.jpg"
+                alt="Trevor Jones at the keys and bass"
+                class="w-full h-full object-contain rounded-lg shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_4px_20px_rgba(0,0,0,0.6)]"
+                style="filter: brightness(0.92) contrast(1.05) saturate(0.9);"
+              />
+            </div>
+            <div class="flex-1">
+              <img
+                src="/trevor_bassguitar.jpg"
+                alt="Trevor Jones with bass guitar"
+                class="w-full h-full object-contain rounded-lg shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_4px_20px_rgba(0,0,0,0.6)]"
+                style="filter: brightness(0.92) contrast(1.05) saturate(0.9);"
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Scroll indicator -->
-      <div class="absolute bottom-10 left-10 md:left-16 flex items-center gap-3" aria-hidden="true">
-        <div class="w-px h-12 bg-parchment/20"></div>
-        <span class="font-mono text-[9px] uppercase tracking-widest text-parchment/25">Scroll</span>
-      </div>
     </div>
   </section>
 
@@ -89,184 +81,16 @@ import bio from '../data/bio.json';
 
       <!-- Content column -->
       <div class="md:col-span-9">
-        <p class="font-serif text-2xl md:text-3xl text-parchment leading-relaxed mb-8" data-reveal>
-          {bio.bio[0]}
-        </p>
-        <a
-          href="/about"
-          class="inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-widest text-bauhaus-red hover:text-parchment transition-colors group"
-          data-reveal
-          data-delay="200"
-        >
-          Full biography
-          <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── FEATURED PAGES ────────────────────────────────────── -->
-  <section class="border-t border-white/8 py-28">
-    <div class="max-w-7xl mx-auto px-6 md:px-10">
-      <!-- Section header -->
-      <div class="mb-16" data-reveal>
-        <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-3">
-          Work
-        </p>
-        <h2 class="font-serif text-4xl md:text-5xl text-parchment">
-          Selected Work
-        </h2>
-      </div>
-
-      <!-- Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-0 border border-white/8">
-        <!-- Theater -->
-        <a
-          href="/theater"
-          class="group block p-10 border-b md:border-b-0 md:border-r border-white/8 hover:bg-white/2 transition-colors relative overflow-hidden"
-          data-reveal
-        >
-          <div
-            class="absolute bottom-0 left-0 right-0 h-0.5 bg-bauhaus-red scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"
-            aria-hidden="true"
-          ></div>
-          <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red mb-6">
-            01
-          </p>
-          <h3 class="font-serif text-2xl md:text-3xl text-parchment mb-4 leading-tight">
-            Theater
-          </h3>
-          <p class="font-mono text-xs text-parchment/40 leading-relaxed mb-8">
-            House Bassist at The Marriott Theatre. Substitute in Hamilton's Chicago run.
-          </p>
-          <span class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 group-hover:text-bauhaus-red transition-colors flex items-center gap-2">
-            View credits <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-          </span>
-        </a>
-
-        <!-- Music -->
-        <a
-          href="/music"
-          class="group block p-10 border-b md:border-b-0 md:border-r border-white/8 hover:bg-white/2 transition-colors relative overflow-hidden"
-          data-reveal
-          data-delay="150"
-        >
-          <div
-            class="absolute bottom-0 left-0 right-0 h-0.5 bg-bauhaus-blue scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"
-            aria-hidden="true"
-          ></div>
-          <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-blue mb-6">
-            02
-          </p>
-          <h3 class="font-serif text-2xl md:text-3xl text-parchment mb-4 leading-tight">
-            Music
-          </h3>
-          <p class="font-mono text-xs text-parchment/40 leading-relaxed mb-8">
-            Molehill (Alt. Rock), symphonic work, Montreux &amp; Vienne Jazz Festivals.
-          </p>
-          <span class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 group-hover:text-bauhaus-blue transition-colors flex items-center gap-2">
-            Discography &amp; credits <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-          </span>
-        </a>
-
-        <!-- Consulting -->
-        <a
-          href="/consulting"
-          class="group block p-10 hover:bg-white/2 transition-colors relative overflow-hidden"
-          data-reveal
-          data-delay="300"
-        >
-          <div
-            class="absolute bottom-0 left-0 right-0 h-0.5 bg-bauhaus-yellow scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"
-            aria-hidden="true"
-          ></div>
-          <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-yellow mb-6">
-            03
-          </p>
-          <h3 class="font-serif text-2xl md:text-3xl text-parchment mb-4 leading-tight">
-            Consulting
-          </h3>
-          <p class="font-mono text-xs text-parchment/40 leading-relaxed mb-8">
-            Limited consultations for musicians navigating a career crossroads.
-          </p>
-          <span class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 group-hover:text-bauhaus-yellow transition-colors flex items-center gap-2">
-            Learn more <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── NOTABLE MOMENTS ───────────────────────────────────── -->
-  <section class="py-28 bg-bauhaus-red/5 border-y border-bauhaus-red/10">
-    <div class="max-w-7xl mx-auto px-6 md:px-10">
-      <div class="mb-14" data-reveal>
-        <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-3">Notable</p>
-        <h2 class="font-serif text-4xl md:text-5xl text-parchment">Landmarks</h2>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-0 border border-white/8">
-        {[
-          { label: 'Carnegie Hall', sub: 'New York, NY · 2004', accent: 'text-bauhaus-red' },
-          { label: 'Montreux Jazz', sub: 'Montreux, Switzerland', accent: 'text-bauhaus-blue' },
-          { label: 'Jazz à Vienne', sub: 'Vienne, France', accent: 'text-bauhaus-blue' },
-          { label: 'Hamilton', sub: 'Chicago · Ongoing', accent: 'text-bauhaus-red' },
-        ].map((item, i) => (
-          <div
-            class="p-8 border-b md:border-b-0 border-r last:border-r-0 border-white/8"
+        {bio.bio.map((paragraph, i) => (
+          <p
+            class={`font-serif text-parchment leading-relaxed ${i === 0 ? 'text-2xl md:text-3xl mb-8' : 'text-xl text-parchment/80 mt-6'}`}
             data-reveal
             data-delay={String(i * 100)}
-          >
-            <div class={`font-mono text-[9px] uppercase tracking-widest mb-4 ${item.accent}`}>
-              ◆
-            </div>
-            <p class="font-serif text-lg md:text-xl text-parchment mb-2 leading-tight">{item.label}</p>
-            <p class="font-mono text-[10px] text-parchment/35 uppercase tracking-wider leading-relaxed">{item.sub}</p>
-          </div>
+            set:html={parseLinks(paragraph)}
+          />
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ─── ENDORSEMENTS ──────────────────────────────────────── -->
-  <section class="py-24 border-b border-white/8">
-    <div class="max-w-7xl mx-auto px-6 md:px-10">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
-        <div data-reveal="left">
-          <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-3">Endorsed by</p>
-          <h2 class="font-serif text-3xl md:text-4xl text-parchment">Industry Partners</h2>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-10 md:gap-16" data-reveal>
-          {bio.endorsements.map((e) => (
-            <div class="text-left md:text-right">
-              <p class="font-serif text-2xl text-parchment">{e.brand}</p>
-              <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/35 mt-1">{e.role}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── CTA ───────────────────────────────────────────────── -->
-  <section class="py-32">
-    <div class="max-w-7xl mx-auto px-6 md:px-10 text-center">
-      <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-5" data-reveal>
-        Get in touch
-      </p>
-      <h2 class="font-serif italic text-5xl md:text-7xl text-parchment mb-10" data-reveal data-delay="100">
-        Let's talk.
-      </h2>
-      <div data-reveal data-delay="200">
-        <a
-          href="/contact"
-          class="inline-flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-void bg-bauhaus-red px-10 py-5 hover:bg-bauhaus-red/85 transition-colors"
-        >
-          Contact Trevor
-          <span aria-hidden="true">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
 </Layout>

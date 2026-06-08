@@ -1,0 +1,387 @@
+---
+import Layout from '../layouts/Layout.astro';
+import theater from '../data/theater.json';
+import music from '../data/music.json';
+
+type Credit = (typeof theater.credits)[number];
+const grouped: Record<string, Credit[]> = {};
+for (const c of theater.credits) {
+  (grouped[c.year] ??= []).push(c);
+}
+const years = Object.keys(grouped).sort((a, b) => Number(b) - Number(a));
+---
+
+<Layout
+  title="Credits | Trevor Jones"
+  description="Theater credits for Chicago-based bassist Trevor Jones — Bassist at The Marriott Theatre and substitute in Hamilton's Chicago run."
+>
+  <!-- ─── PAGE HERO ─────────────────────────────────────────── -->
+  <section class="pt-40 pb-20 relative overflow-hidden border-b border-white/8">
+    <div class="absolute left-0 top-0 bottom-0 w-1 bg-bauhaus-red" aria-hidden="true"></div>
+
+    <div class="max-w-7xl mx-auto px-10 md:px-16">
+      <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red mb-8">
+        02 — On/Off Stage
+      </p>
+      <h1 class="font-serif italic text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-parchment">
+        Credits
+      </h1>
+    </div>
+  </section>
+
+  <!-- ─── CURRENT POSITION ──────────────────────────────────── -->
+  <section class="max-w-7xl mx-auto px-6 md:px-10 py-28">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+      <div class="md:col-span-3" data-reveal="left">
+        <div class="w-12 h-px bg-bauhaus-red mb-4"></div>
+        <p class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red">Current Position</p>
+      </div>
+
+      <div class="md:col-span-9">
+        <div class="border border-white/8 p-10 relative" data-reveal>
+          <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-bauhaus-red" aria-hidden="true"></div>
+
+          <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30 mb-6">
+            {theater.currentPosition.location}
+          </p>
+          <h2 class="font-serif text-3xl md:text-4xl text-parchment mb-2 leading-tight">
+            {theater.currentPosition.venue}
+          </h2>
+          <p class="font-mono text-xs uppercase tracking-widest text-bauhaus-red mb-8">
+            {theater.currentPosition.title}
+          </p>
+          <p class="font-serif text-lg text-parchment/70 leading-relaxed max-w-2xl">
+            {theater.currentPosition.description}
+          </p>
+          <p class="font-serif text-lg leading-relaxed max-w-2xl mt-6 text-[#c8893a]">
+            Currently performing Stephen Sondheim's A Little Night Music through August 9th.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CREDITS ACCORDION ────────────────────────────────── -->
+  <section class="border-t border-white/8 py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="mb-16" data-reveal>
+        <h2 class="font-serif text-4xl md:text-5xl text-parchment">Theater</h2>
+      </div>
+
+      <div class="border border-white/8 divide-y divide-white/8">
+        {years.map((year, i) => (
+          <div class={`accordion-item${i === 0 ? ' is-open' : ''}`}>
+            <button
+              class="accordion-trigger w-full flex items-center justify-between px-6 md:px-8 py-5 text-left hover:bg-white/[0.03] transition-colors"
+              aria-expanded={i === 0 ? 'true' : 'false'}
+            >
+              <div class="flex items-center gap-4">
+                <span class="accordion-accent block w-0.5 h-6 bg-bauhaus-red flex-shrink-0" style="opacity:0" aria-hidden="true"></span>
+                <span class="accordion-year font-serif text-2xl md:text-3xl text-parchment/50">{year}</span>
+              </div>
+              <div class="flex items-center gap-5">
+                <span class="font-mono text-[10px] uppercase tracking-widest text-parchment/25">
+                  {grouped[year].length === 1 ? '1 production' : `${grouped[year].length} productions`}
+                </span>
+                <span class="accordion-chevron font-mono text-xs text-parchment/30" aria-hidden="true">▾</span>
+              </div>
+            </button>
+
+            <div class="accordion-content" style={i !== 0 ? 'max-height:0;overflow:hidden;' : undefined}>
+              <table class="w-full border-collapse border-t border-white/5">
+                <thead class="sr-only">
+                  <tr><th>Production</th><th>Venue</th><th>Role</th></tr>
+                </thead>
+                <tbody>
+                  {grouped[year].map((credit, j) => (
+                    <tr class={`hover:bg-white/2 transition-colors${j > 0 ? ' border-t border-white/5' : ''}`}>
+                      <td class="py-4 pl-10 md:pl-12 pr-4">
+                        <span class="font-serif text-lg text-parchment">{credit.show}</span>
+                        {'note' in credit && credit.note && (
+                          <span class="block font-mono text-[10px] italic text-bauhaus-yellow/80 mt-0.5 tracking-wide">
+                            {credit.note}
+                          </span>
+                        )}
+                        <span class="block md:hidden font-mono text-[10px] text-parchment/30 mt-0.5 leading-snug">
+                          {credit.venue}
+                        </span>
+                      </td>
+                      <td class="hidden md:table-cell py-4 px-4 align-top">
+                        <span class="font-mono text-[10px] text-parchment/30 leading-snug">{credit.venue}</span>
+                      </td>
+                      <td class="py-4 pl-4 pr-6 md:pr-8 text-right align-top whitespace-nowrap">
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red/60">{credit.role}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SYMPHONIC WORK ──────────────────────────────────── -->
+  <section class="border-t border-white/8 py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="mb-16" data-reveal>
+        <h2 class="font-serif text-4xl md:text-5xl text-parchment mb-3">Symphonic Work (Selected Credits)</h2>
+
+      </div>
+
+      <div class="border border-white/8 divide-y divide-white/8">
+        {music.orchestral.map((ens, i) => (
+          <div class={`accordion-item${i === 0 ? ' is-open' : ''}`}>
+            <button
+              class="accordion-trigger w-full flex items-center justify-between px-6 md:px-8 py-5 text-left hover:bg-white/[0.03] transition-colors"
+              aria-expanded={i === 0 ? 'true' : 'false'}
+            >
+              <div class="flex items-center gap-4">
+                <span class="accordion-accent block w-0.5 h-6 bg-bauhaus-red flex-shrink-0" style="opacity:0" aria-hidden="true"></span>
+                <span class="accordion-year font-serif text-2xl md:text-3xl text-parchment/50">{ens.ensemble}</span>
+              </div>
+              <div class="flex items-center gap-5">
+                <span class="font-mono text-[10px] uppercase tracking-widest text-parchment/25">{ens.location}</span>
+                <span class="accordion-chevron font-mono text-xs text-parchment/30" aria-hidden="true">▾</span>
+              </div>
+            </button>
+
+            <div class="accordion-content" style={i !== 0 ? 'max-height:0;overflow:hidden;' : undefined}>
+              <div class="border-t border-white/5 pl-10 md:pl-12 pr-6 md:pr-8 py-6">
+                {(ens.description ?? ens.note) && (
+                  <p class="font-serif text-lg text-parchment/70 leading-relaxed max-w-2xl mb-4">
+                    {ens.description ?? ens.note}
+                  </p>
+                )}
+                <span class="font-mono text-[10px] uppercase tracking-widest text-bauhaus-red/60">{ens.type}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RECORDING MOLEHILL ──────────────────────────────── -->
+  <section class="border-t border-white/8 py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="mb-16" data-reveal>
+        <h2 class="font-serif text-4xl md:text-5xl text-parchment mb-3">Recording — Molehill</h2>
+        <p class="font-mono text-[10px] uppercase tracking-widest text-parchment/30">(Songwriting, Production, Bass, and Other Instruments)</p>
+      </div>
+
+      <div class="border border-white/8 divide-y divide-white/8">
+        {[
+          { title: 'Hope',                       year: '2023', type: 'EP',     id: '18PTurBySh0ew8PniMb7DE' },
+          { title: 'Snow Baby',                  year: '2021', type: 'Single', id: '6cTSHjoHO6FuPyP0W9hTQS' },
+          { title: 'Hostage',                    year: '2019', type: 'EP',     id: '7mnugZ4ez0PpOkLFLAZoER' },
+          { title: 'Music Box',                  year: '2019', type: 'Single', id: '5sEAkBjvLfZUg4FwVSrdaP' },
+          { title: 'Hearts on Fire',             year: '2017', type: 'EP',     id: '3ulSlscf7se0vWQlCut0f2' },
+          { title: 'Tin God',                    year: '2015', type: 'EP',     id: '65DmX2ZR0QnwChCMnHN9vU' },
+          { title: 'Live in Chicago',            year: '2015', type: 'EP',     id: '2mh1e0ttRQILS68APmY3fh' },
+          { title: 'Why Did You Make Me Care?',  year: '2013', type: 'Single', id: '3yidZVmj7rXGYlIbh11fPx' },
+          { title: 'Equinox',                    year: '2012', type: 'LP',     id: '2GWIZYyE8xdbo4rZmVPf9T' },
+        ].map((release, i) => (
+          <div class={`accordion-item${i === 0 ? ' is-open' : ''}`}>
+            <button
+              class="accordion-trigger w-full flex items-center justify-between px-6 md:px-8 py-5 text-left hover:bg-white/[0.03] transition-colors"
+              aria-expanded={i === 0 ? 'true' : 'false'}
+            >
+              <div class="flex items-center gap-4">
+                <span class="accordion-accent block w-0.5 h-6 bg-bauhaus-red flex-shrink-0" style="opacity:0" aria-hidden="true"></span>
+                <div>
+                  <span class="accordion-year font-serif text-2xl md:text-3xl text-parchment/50">{release.title}</span>
+                  <span class="block font-mono text-[9px] uppercase tracking-widest text-parchment/25 mt-0.5">{release.year}</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-5">
+                <span class="font-mono text-[10px] uppercase tracking-widest text-parchment/25">{release.type}</span>
+                <span class="accordion-chevron font-mono text-xs text-parchment/30" aria-hidden="true">▾</span>
+              </div>
+            </button>
+
+            <div class="accordion-content" style={i !== 0 ? 'max-height:0;overflow:hidden;' : undefined}>
+              <div class="border-t border-white/5 px-6 md:px-8 py-4">
+                <iframe
+                  src={`https://open.spotify.com/embed/album/${release.id}?theme=0`}
+                  width="100%"
+                  height="152"
+                  frameborder="0"
+                  allowtransparency="true"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RECORDING CREDITS ───────────────────────────────── -->
+  <section class="border-t border-white/8 py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="mb-16" data-reveal>
+        <h2 class="font-serif text-4xl md:text-5xl text-parchment">Recording (Selected Credits)</h2>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <iframe src="https://open.spotify.com/embed/track/7prn5AhV3p4PFHuXdTsNit?theme=0" width="100%" height="152" frameborder="0" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe src="https://open.spotify.com/embed/track/3PXMm5naJOzHvLlPAoyL09?theme=0" width="100%" height="152" frameborder="0" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe src="https://open.spotify.com/embed/track/7xpbBvMHUKdt9Sgj8HM2my?theme=0" width="100%" height="152" frameborder="0" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe src="https://open.spotify.com/embed/track/1p3Bvt0jD6fJPvVTu5TcqW?theme=0" width="100%" height="152" frameborder="0" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── REMIXES ─────────────────────────────────────────── -->
+  <section class="border-t border-white/8 py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="mb-16" data-reveal>
+        <h2 class="font-serif text-4xl md:text-5xl text-parchment">Remixes</h2>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <iframe width="100%" height="152" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/jonestrevor/kimbra-everybody-knows-remix&color=%23c8893a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+        <iframe width="100%" height="152" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/jonestrevor/goldmine-demo-remix&color=%23c8893a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+        <iframe src="https://open.spotify.com/embed/track/3oU2yeUrpBX0Trj6KwzHXb?theme=0" width="100%" height="152" frameborder="0" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DEEP SOUNDS ─────────────────────────────────────── -->
+  <section class="border-t border-white/8 py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="mb-16" data-reveal>
+        <h2 class="font-serif text-4xl md:text-5xl text-parchment">Original Music for the Music Library, Deep Sounds</h2>
+      </div>
+
+      <div class="border border-white/8 divide-y divide-white/8">
+        {[
+          { title: 'Flow State',                     url: 'https://www.deepsounds.com/tracks/flow-state',                      img: '/Deep_Sounds_Cinematic.jpg' },
+          { title: 'Tribal Tongues',                 url: 'https://www.deepsounds.com/tracks/tribal-tongues',                  img: '/Deep_Sounds_Cinematic.jpg' },
+          { title: 'Ice House',                      url: 'https://www.deepsounds.com/tracks/ice-house',                       img: '/Deep_Sounds_Cinematic.jpg' },
+          { title: 'Over the Horizon',               url: 'https://www.deepsounds.com/tracks/over-the-horizon',                img: '/Deep_Sounds_Cinematic.jpg' },
+          { title: 'Descending into the Underworld', url: 'https://www.deepsounds.com/tracks/descending-into-the-underworld',  img: '/Deep_Sounds_Electronic.jpg' },
+          { title: 'Neon Daydream',                  url: 'https://www.deepsounds.com/tracks/neon-daydream',                   img: '/Deep_Sounds_Electronic.jpg' },
+          { title: 'Ascend',                         url: 'https://www.deepsounds.com/tracks/ascend',                          img: '/Deep_Sounds_Electronic.jpg' },
+          { title: 'Top Down',                       url: 'https://www.deepsounds.com/tracks/top-down',                        img: '/Deep_Sounds_Instrumentals.jpg' },
+          { title: 'Stuntin',                        url: 'https://www.deepsounds.com/tracks/stuntin',                         img: '/Deep_Sounds_Instrumentals.jpg' },
+          { title: 'Pick Grind',                     url: 'https://www.deepsounds.com/tracks/pick-grind',                      img: '/Deep_Sounds_Instrumentals.jpg' },
+          { title: 'Late Night Drive',               url: 'https://www.deepsounds.com/tracks/late-night-drive',                img: '/Deep_Sounds_Instrumentals.jpg' },
+          { title: 'Teak It Twice',                  url: 'https://www.deepsounds.com/tracks/teak-it-twice',                   img: '/Deep_Sounds_Instrumentals.jpg' },
+          { title: 'Follow the Lead',                url: 'https://www.deepsounds.com/tracks/follow-the-lead',                 img: '/Deep_Sounds_Instrumentals.jpg' },
+          { title: 'Back at It',                     url: 'https://www.deepsounds.com/tracks/back-at-it',                      img: '/Deep_Sounds_Instrumentals.jpg' },
+          { title: 'Step Off',                       url: 'https://www.deepsounds.com/tracks/step-off',                        img: '/Deep_Sounds_Instrumentals.jpg' },
+          { title: 'Slow Your Roll',                 url: 'https://www.deepsounds.com/tracks/slow-your-roll',                  img: '/Deep_Sounds_Instrumentals.jpg' },
+          { title: 'Look Twice',                     url: 'https://www.deepsounds.com/tracks/look-twice',                      img: '/Deep_Sounds_Instrumentals.jpg' },
+          { title: 'Sweet Heat',                     url: 'https://www.deepsounds.com/tracks/sweet-heat',                      img: '/Deep_Sounds_Dance.jpg' },
+          { title: 'BF 30',                          url: 'https://www.deepsounds.com/tracks/bf-30',                           img: '/Deep_Sounds_Dance.jpg' },
+          { title: 'Cha Yeah',                       url: 'https://www.deepsounds.com/tracks/cha-yeah',                        img: '/Deep_Sounds_Dance.jpg' },
+          { title: 'Dance Already',                  url: 'https://www.deepsounds.com/tracks/dance-already',                   img: '/Deep_Sounds_Dance.jpg' },
+        ].map((track, i) => (
+          <div class={`accordion-item${i === 0 ? ' is-open' : ''}`}>
+            <button
+              class="accordion-trigger w-full flex items-center justify-between px-6 md:px-8 py-5 text-left hover:bg-white/[0.03] transition-colors"
+              aria-expanded={i === 0 ? 'true' : 'false'}
+            >
+              <div class="flex items-center gap-4">
+                <span class="accordion-accent block w-0.5 h-6 bg-bauhaus-red flex-shrink-0" style="opacity:0" aria-hidden="true"></span>
+                <img src={track.img} alt="" class="w-10 h-10 rounded object-cover flex-shrink-0" />
+                <span class="accordion-year font-serif text-2xl md:text-3xl text-parchment/50">{track.title}</span>
+              </div>
+              <div class="flex items-center gap-5">
+                <span class="font-mono text-[10px] uppercase tracking-widest text-parchment/25">Original Music</span>
+                <span class="accordion-chevron font-mono text-xs text-parchment/30" aria-hidden="true">▾</span>
+              </div>
+            </button>
+
+            <div class="accordion-content" style={i !== 0 ? 'max-height:0;overflow:hidden;' : undefined}>
+              <div class="border-t border-white/5">
+                <div class="relative h-56">
+                  <img src={track.img} alt="" class="absolute inset-0 w-full h-full object-cover" />
+                  <div class="absolute inset-0 bg-void/70"></div>
+                </div>
+                <div class="pl-10 md:pl-12 pr-6 md:pr-8 py-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
+                  <p class="font-mono text-[9px] uppercase tracking-widest text-parchment/30">
+                    Available for licensing on Deep Sounds.
+                  </p>
+                  <a
+                    href={track.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-void bg-bauhaus-red px-5 py-3 hover:bg-bauhaus-red/85 transition-colors flex-shrink-0"
+                  >
+                    Listen on Deep Sounds <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .accordion-year    { transition: color 0.3s ease; }
+  .accordion-chevron { display: inline-block; transition: transform 0.35s ease; }
+  .accordion-accent  { transition: opacity 0.3s ease; }
+
+  .waveform-bar {
+    display: block;
+    width: 3px;
+    min-height: 3px;
+    background: #c8893a;
+    opacity: 0.45;
+    border-radius: 1px;
+    animation: waveform-pulse 1.4s ease-in-out infinite alternate;
+  }
+
+  @keyframes waveform-pulse {
+    0%   { height: 3px;  opacity: 0.3; }
+    100% { height: 28px; opacity: 0.7; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.accordion-item').forEach((item) => {
+    const trigger    = item.querySelector<HTMLButtonElement>('.accordion-trigger')!;
+    const content    = item.querySelector<HTMLElement>('.accordion-content')!;
+    const yearEl     = item.querySelector<HTMLElement>('.accordion-year')!;
+    const chevron    = item.querySelector<HTMLElement>('.accordion-chevron')!;
+    const accent     = item.querySelector<HTMLElement>('.accordion-accent')!;
+    const openColor  = item.dataset.openColor ?? '#D40000';
+
+    content.style.overflow   = 'hidden';
+    content.style.transition = 'max-height 0.35s ease-in-out';
+
+    function open() {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      item.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+      yearEl.style.color      = openColor;
+      chevron.style.transform = 'rotate(180deg)';
+      accent.style.opacity    = '1';
+    }
+
+    function close() {
+      content.style.maxHeight = '0';
+      item.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      yearEl.style.color      = '';
+      chevron.style.transform = '';
+      accent.style.opacity    = '0';
+    }
+
+    if (item.classList.contains('is-open')) open();
+
+    trigger.addEventListener('click', () => {
+      item.classList.contains('is-open') ? close() : open();
+    });
+  });
+</script>

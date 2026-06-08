@@ -5,7 +5,7 @@
       "genre": "Alternative Rock",
       "role": "Co-writer, Bassist",
       "status": "Active",
-      "description": "An alternative rock band based in Chicago. Trevor co-writes the material and anchors the low end, bringing the same harmonic sophistication he developed in orchestral and theater settings into a guitar-driven rock context.",
+      "description": "An alternative rock band based in Chicago. Trevor co-writes the material and anchors the low end.",
       "achievements": [
         "National touring",
         "Chicago Tribune coverage",
@@ -18,39 +18,26 @@
     {
       "ensemble": "Elgin Symphony Orchestra",
       "location": "Elgin, IL",
-      "type": "Professional Symphony"
+      "type": "Professional Symphony",
+      "description": "A celebrated regional orchestra founded in 1950 and named Orchestra of the Year four times by the Illinois Council of Orchestras, performing at the Hemmens Cultural Center in Elgin, IL."
     },
     {
-      "ensemble": "Grant Park Orchestra",
+      "ensemble": "Chicago Philharmonic",
       "location": "Chicago, IL",
       "type": "Professional Symphony",
-      "note": "Resident orchestra of the Grant Park Music Festival, one of the country's last free outdoor classical music series"
+      "description": "A musician-governed orchestra founded by principals of the Lyric Opera Orchestra, drawing from nearly 200 of Chicago's top classical performers and named one of the country's finest symphonic orchestras by the Chicago Tribune."
+    },
+    {
+      "ensemble": "Rockford Symphony Orchestra",
+      "location": "Rockford, IL",
+      "type": "Professional Symphony",
+      "description": "One of the leading cultural institutions in Northern Illinois, founded in 1934 and the third largest orchestra in Illinois, performing at the historic Coronado Theatre in Rockford. Trevor was a member for several years."
     },
     {
       "ensemble": "Civic Orchestra of Chicago",
       "location": "Chicago, IL",
       "type": "Training Orchestra",
       "note": "The training orchestra of the Chicago Symphony Orchestra"
-    }
-  ],
-  "festivals": [
-    {
-      "name": "Montreux Jazz Festival",
-      "location": "Montreux, Switzerland",
-      "year": ""
-    },
-    {
-      "name": "Jazz à Vienne",
-      "location": "Vienne, France",
-      "year": ""
-    }
-  ],
-  "notable": [
-    {
-      "event": "Carnegie Hall",
-      "location": "New York, NY",
-      "year": "2004",
-      "description": "Performed at Carnegie Hall."
     }
   ],
   "projects": [

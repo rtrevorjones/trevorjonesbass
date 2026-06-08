@@ -2,10 +2,10 @@
   "name": "Trevor Jones",
   "title": "Bassist",
   "location": "Chicago, IL",
-  "tagline": "Shaping sound at the intersection of theater, jazz, and the orchestral tradition.",
+  "tagline": "Shaping sound at the intersection of theater, rock, and the orchestral tradition.",
   "bio": [
-    "Trevor Jones is a Chicago-based bassist and co-founder of Double Bass HQ. He serves as House Bassist and Music Coordinator at the Marriott Theatre in Lincolnshire, IL, where he has played on dozens of productions. He also freelances across the Chicago area and writes and performs in the alternative rock band Molehill, which has toured nationally and earned coverage in the Chicago Tribune.
-    "Beyond the pit and concert hall, Trevor is the co-writer and bassist for Molehill, an alternative rock band with national touring credits, a Chicago Tribune feature, and an ASCAP+ Award. He is a D'Addario Artist, and Gallien-Krueger endorsed bassist, and co-founder of Double Bass HQ, an educational platform for bass players."
+    "Trevor Jones is a Chicago-based bassist and co-founder of [Double Bass HQ](https://doublebasshq.com/). He serves as House Bassist and Music Coordinator at the [Marriott Theatre](https://www.marriotttheatre.com/) in Lincolnshire, IL, — see his <a href=\"/credits\" class=\"text-[#c8893a] no-underline hover:underline\">credits</a>. He also freelances widely across the Chicago area and writes and performs in the alternative rock band [Molehill](https://www.molehillmusic.com/), which has toured nationally and earned coverage in the Chicago Tribune.",
+    "Trevor endorses [Gallien-Krueger](https://www.gallien-krueger.com/) amplifiers and cabinets and is a [D'Addario](https://www.daddario.com/) Artist."
   ],
   "highlights": [
     "House Bassist & Music Coordinator, The Marriott Theatre (Lincolnshire, IL)",
@@ -33,6 +33,18 @@
       "category": "Amplification"
     }
   ],
+  "education": [
+    {
+      "degree": "Bachelor of Music Education",
+      "institution": "West Virginia University",
+      "year": 2006
+    },
+    {
+      "degree": "Master of Music Performance",
+      "institution": "DePaul University",
+      "year": 2009
+    }
+  ],
   "organizations": [
     {
       "name": "Double Bass HQ",
@@ -41,7 +53,15 @@
     },
     {
       "name": "ASCAP",
-      "role": "Member"
+      "role": "Member & Multi-Time ASCAP+ Award Winner"
+    },
+    {
+      "name": "Theater Musicians Association — Chicago Area Chapter",
+      "role": "Secretary-Treasurer"
+    },
+    {
+      "name": "Chicago Federation of Musicians Local 10-208",
+      "role": "Proud Member"
     }
   ]
 }
