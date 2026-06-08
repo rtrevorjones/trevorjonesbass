@@ -47,10 +47,13 @@ const currentPath = Astro.url.pathname;
     <!-- Mobile hamburger -->
     <button
       id="menu-toggle"
-      class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 group"
+      class="md:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5 group cursor-pointer"
+      style="touch-action: manipulation;"
       aria-expanded="false"
       aria-controls="mobile-menu"
       aria-label="Toggle navigation"
+      type="button"
+      onclick="void(0)"
     >
       <span class="block w-6 h-px bg-parchment transition-all duration-300 group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[7px]"></span>
       <span class="block w-6 h-px bg-parchment transition-all duration-300 group-aria-expanded:opacity-0"></span>
@@ -62,6 +65,7 @@ const currentPath = Astro.url.pathname;
   <div
     id="mobile-menu"
     class="md:hidden hidden border-t border-white/5 bg-void"
+    style="z-index: 49;"
     role="dialog"
     aria-label="Navigation menu"
   >
@@ -85,26 +89,43 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script>
+  let navAbort: AbortController | null = null;
+
   function initNav() {
-    const toggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('mobile-menu');
+    // Tear down any previous listeners before re-registering
+    if (navAbort) navAbort.abort();
+    navAbort = new AbortController();
+    const { signal } = navAbort;
+
+    const toggle = document.getElementById('menu-toggle') as HTMLButtonElement | null;
+    const menu = document.getElementById('mobile-menu') as HTMLElement | null;
     if (!toggle || !menu) return;
 
+    function toggleMenu() {
+      const isOpen = toggle!.getAttribute('aria-expanded') === 'true';
+      toggle!.setAttribute('aria-expanded', String(!isOpen));
+      menu!.classList.toggle('hidden');
+    }
+
+    // touchend with preventDefault prevents ghost click on iOS Safari
+    toggle.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      toggleMenu();
+    }, { passive: false, signal } as AddEventListenerOptions);
+
     toggle.addEventListener('click', () => {
-      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!isOpen));
-      menu.classList.toggle('hidden');
-    });
+      toggleMenu();
+    }, { signal });
 
     // Close on link click
     menu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.add('hidden');
-      });
+        toggle!.setAttribute('aria-expanded', 'false');
+        menu!.classList.add('hidden');
+      }, { signal });
     });
   }
 
-  initNav();
+  document.addEventListener('DOMContentLoaded', initNav);
   document.addEventListener('astro:page-load', initNav);
 </script>
