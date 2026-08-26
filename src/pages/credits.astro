@@ -68,6 +68,25 @@ const years = Object.keys(grouped).sort((a, b) => Number(b) - Number(a));
         <h2 class="font-serif text-4xl md:text-5xl text-parchment">Theater</h2>
       </div>
 
+      <div class="border border-white/8 p-6 md:p-8 mb-16 relative" data-reveal>
+        <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-bauhaus-red" aria-hidden="true"></div>
+        <div class="max-w-2xl mx-auto">
+          <div class="relative aspect-video w-full">
+            <iframe
+              src="https://www.youtube.com/embed/AtiyyWuu7hY"
+              title="A Weekend In The Country | A Little Night Music at Marriott Theatre"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="absolute inset-0 w-full h-full"
+            ></iframe>
+          </div>
+          <p class="font-mono text-[9px] uppercase tracking-widest text-parchment/40 mt-4 leading-relaxed">
+            Sondheim leaves something to explore in every show.
+          </p>
+        </div>
+      </div>
+
       <div class="border border-white/8 divide-y divide-white/8">
         {years.map((year, i) => (
           <div class={`accordion-item${i === 0 ? ' is-open' : ''}`}>
